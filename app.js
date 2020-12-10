@@ -4,11 +4,6 @@ var outputDiv = document.querySelector("#output")
 
 btnTranslate.addEventListener("click", clickHandler)
 
-mainWindow = new BrowserWindow({
-        webPreferences: {
-            nodeIntegration: true
-        }
-    });
 
 const fs = require('fs');
 
