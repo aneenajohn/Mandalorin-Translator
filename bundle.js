@@ -8,7 +8,7 @@ var outputDiv = document.querySelector("#output")
 btnTranslate.addEventListener("click", clickHandler)
 
 
-const fs = require('browserify-fs');
+const fs = require('fs');
 
 function clickHandler() {
     var inputText = txtInput.value;
