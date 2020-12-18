@@ -4,34 +4,30 @@ var outputDiv = document.querySelector("#output")
 
 btnTranslate.addEventListener("click", clickHandler)
 
-
-const fs = require('fs');
-
 function clickHandler() {
     var inputText = txtInput.value;
     fetch(getTranslationURL(inputText))
         .then(response => response.json())
         .then(json => {
-            var translatedAudio = json.contents.translated.audio;
-            console.log("output = "+translatedAudio);
-            fs.writeFile('morse-output.wav', translatedAudio, (err) => {
-                // In case of a error throw err. 
-                if (err) throw err;
-            })
-            console.log("The file was saved!");
-            // outputDiv.innerText = translatedText;
-            // console.log(translatedText);
-            var translatedAudioElement = new Audio('morse-output.wav');
-            translatedAudioElement.play();
+            var translatedText = json.contents.translated;
+            outputDiv.innerText = translatedText;
         })
+        // .then(json => console.log(json.contents.translated))---> puts the output on console..but we want it on output box.
+        // here in the 2nd then json is just a var name you can use anything like abcd in place of json
+        .catch(errorHandler)
+    // look below for you we didnt pass error arg to errorHandler fnc
 }
 
 
-
-var serverURL = "http://api.funtranslations.com/translate/morse/audio.json"
+var serverURL = "https://api.funtranslations.com/translate/mandalorian.json"
 
 function getTranslationURL(text) {
-    return serverURL + "?text=" + text + "&speed=7&tone=700";
+    return serverURL + "?text=" + text ;
+}
+
+function errorHandler(error) {
+    console.log("error ocuured", error);
+    alert('Something wrong with server, Please try again after sometime');
 }
 
 // var fs = require('fs'); // reqire fileSystem node module
